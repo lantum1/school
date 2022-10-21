@@ -1,2 +1,2 @@
-# Studying Programming
-This is a repo of all programs I did at school and at university when I was studing programming
+# Обучение программированию
+Репозиторий со всеми (почти, какие я смог у себя найти на диске) задачами по программированию и проектами, которые были сделаны мной во время обучения в школе и в ВУЗе

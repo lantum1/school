@@ -1,0 +1,130 @@
+#define BUTTON 5
+int k=0;
+int g=0;
+int h=0;
+unsigned long t1=0;
+unsigned long t2=0;
+unsigned long h1=0;
+unsigned long h2=0;
+int m[]={-1,-1,-1,-1};
+void setup()
+{
+  pinMode(5, INPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  if (digitalRead(BUTTON)==HIGH){
+    t1=millis();
+    while(digitalRead(BUTTON)!=LOW){
+      t2=millis();
+      h2=millis();
+    }
+  }
+  if (t2-t1<500 && t2>0 && t1>0){
+    k=k+1;
+    m[h]=0;
+    h=h+1;
+  }
+  if (t2-t1>=500){
+    g=g+1;
+    m[h]=1;
+    h=h+1;
+  }
+  if ((millis()-h2)>=3000 && h2!=0){
+    if (k+g==1){
+      if (m[0]==0){
+        Serial.print("E");
+      }
+      if (m[0]==1){
+        Serial.print("T");
+      }
+    }
+    if (k+g==2){
+      if (m[0]==0 && m[1]==1){
+        Serial.print("A");
+      }
+      if (m[0]==0 && m[1]==0){
+        Serial.print("I");
+      }
+      if (m[0]==1 && m[1]==1){
+        Serial.print("M");
+      }
+      if (m[0]==1 && m[1]==0){
+        Serial.print("N");
+      }
+    }
+    if (k+g==3){
+      if (m[0]==1 && m[1]==0 && m[2]==0){
+        Serial.print("D");
+      }
+      if (m[0]==1 && m[1]==1 && m[2]==0){
+        Serial.print("G");
+      }
+      if (m[0]==1 && m[1]==0 && m[2]==1){
+        Serial.print("K");
+      }
+      if (m[0]==1 && m[1]==1 && m[2]==1){
+        Serial.print("O");
+      }
+      if (m[0]==0 && m[1]==1 && m[2]==0){
+        Serial.print("R");
+      }
+      if (m[0]==0 && m[1]==0 && m[2]==0){
+        Serial.print("S");
+      }
+      if (m[0]==0 && m[1]==0 && m[2]==1){
+        Serial.print("U");
+      }
+      if (m[0]==0 && m[1]==1 && m[2]==1){
+        Serial.print("W");
+      }
+    }
+    if (k+g==4){
+      if (m[0]==1 && m[1]==0 && m[2]==0 && m[3]==0){
+        Serial.print("B");
+      }
+      if (m[0]==1 && m[1]==0 && m[2]==1 && m[3]==0){
+        Serial.print("C");
+      }
+      if (m[0]==0 && m[1]==0 && m[2]==1 && m[3]==0){
+        Serial.print("F");
+      }
+      if (m[0]==0 && m[1]==0 && m[2]==0 && m[3]==0){
+        Serial.print("H");
+      }
+      if (m[0]==0 && m[1]==1 && m[2]==1 && m[3]==1){
+        Serial.print("J");
+      }
+      if (m[0]==0 && m[1]==1 && m[2]==0 && m[3]==0){
+        Serial.print("L");
+      }
+      if (m[0]==0 && m[1]==1 && m[2]==1 && m[3]==0){
+        Serial.print("P");
+      }
+      if (m[0]==1 && m[1]==1 && m[2]==0 && m[3]==1){
+        Serial.print("Q");
+      }
+      if (m[0]==0 && m[1]==0 && m[2]==0 && m[3]==1){
+        Serial.print("V");
+      }
+      if (m[0]==1 && m[1]==0 && m[2]==0 && m[3]==1){
+        Serial.print("X");
+      }
+      if (m[0]==1 && m[1]==0 && m[2]==1 && m[3]==1){
+        Serial.print("Y");
+      }
+      if (m[0]==1 && m[1]==1 && m[2]==0 && m[3]==0){
+        Serial.print("Z");
+      }
+    }
+    int m[]={-1,-1,-1,-1};
+    k=0;
+  	g=0;
+    h=0;
+    h2=0;
+  }
+  t1=0;
+  t2=0;
+}

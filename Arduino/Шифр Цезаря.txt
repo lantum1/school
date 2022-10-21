@@ -1,0 +1,95 @@
+#include <EEPROM.h>
+int a=0;
+int b=0;
+int p=0;
+int j=0;
+int k=0;
+int y=0;
+int e=0;
+int u=0;
+byte s;
+byte w;
+String inString;
+String message;
+char x;
+int M[26]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+void setup(){
+  Serial.begin(9600);
+  for (int i=0; i<EEPROM.length(); i++){
+    EEPROM.write(i,0);
+  }
+  Serial.println("Ready. Waiting for input");
+}
+void loop(){
+  if (Serial.available() && b==1){
+    p=Serial.readString().toInt();
+    Serial.println("Done! Please, enter password to access your data: ");
+    b=2;
+  }
+  if (Serial.available() && b==0){
+    for (int i=0; i<100; i++){
+      if (Serial.available()<=0){
+        break;
+      }
+      s=Serial.read();
+      w=s-3;
+      if (w<65){
+        while(w<65){
+          w=w+25;
+        }
+      }
+      EEPROM.write(i,w);
+      delay(50);
+    }
+    b=1;
+    Serial.println("Done! Now, please enter new password: ");
+  }
+	if (Serial.available() && b==2){
+      while(true){
+        if (Serial.available()){
+          j=Serial.readString().toInt();
+          if (p==j){
+            Serial.println("Success!");
+            for (int i=0; i<100; i++){
+              int inChar = EEPROM.read(i);
+              if (inChar==0){
+                message=inString;
+                for (int r=0; r<message.length(); r++){
+                  for (int l=0; l<26; l++){
+                    if (message[r]==M[l]){
+                      e=l;
+                      break;
+                    }
+                  }
+                  u=e+3;
+                  if (u>=26){
+                    while(u>=26){
+                      u=u-26;
+                    }
+                  }
+                  message[r]=M[u];
+                }
+                Serial.println(message);
+                inString="";
+                break;
+              }
+              inString+=(char)inChar;
+            }
+        	break;
+      	  }
+          else{
+            k=k+1;
+            Serial.println("Wrong password! Try again: ");
+            if (k==5){
+              Serial.println("The data, stored in the EEPROM, is going to be erased NOW!");
+              for (int i=0; i<EEPROM.length(); i++){
+                EEPROM.write(i,0);
+              }
+              Serial.println("Done! Have a nice day :)");
+              break;
+            }
+          }
+        }
+      }
+	}
+}

@@ -1,0 +1,157 @@
+#define GREEN 13
+#define RED 12
+#define BUT1 7
+#define BUT2 6
+#define BUT3 5
+#define BUT4 4
+#define SET 3
+int M[]={-1,-1,-1,-1};
+int S[]={-1,-1,-1,-1};
+int k=0;
+int p=0;
+void setup(){
+  pinMode(GREEN, OUTPUT);
+  pinMode(RED, OUTPUT);
+  pinMode(BUT1, INPUT);
+  pinMode(BUT2, INPUT);
+  pinMode(BUT3, INPUT);
+  pinMode(BUT4, INPUT);
+  pinMode(SET, INPUT);
+}
+void loop(){
+  boolean button1=false;
+  boolean button2=true;
+  boolean button3=false;
+  boolean button4=true;
+  boolean button5=false;
+  boolean button6=true;
+  boolean button7=false;
+  boolean button8=true;
+  boolean button9=false;
+  boolean button10=true;
+  if (digitalRead(SET)==1){
+    button9=!button9;
+    delay(50);
+    if (digitalRead(SET)==0){
+      button10=!button10;
+    }
+  }
+  if (button9==true && button10==false){
+    p=0;
+    k=0;
+    digitalWrite(GREEN, LOW);
+    digitalWrite(RED, LOW);
+    while(p!=4){
+      boolean button1=false;
+      boolean button2=true;
+      boolean button3=false;
+      boolean button4=true;
+      boolean button5=false;
+      boolean button6=true;
+      boolean button7=false;
+      boolean button8=true;
+      if (digitalRead(BUT1)==1){
+          button1=!button1;
+          delay(50);
+          if (digitalRead(BUT1)==0){
+              button2=!button2;
+          }
+      }
+      if (button1==true && button2==false){
+          S[p]=1;
+          p=p+1;
+      }
+      if (digitalRead(BUT2)==1){
+          button3=!button3;
+          delay(50);
+          if (digitalRead(BUT2)==0){
+              button4=!button4;
+          }
+      }
+      if (button3==true && button4==false){
+          S[p]=2;
+          p=p+1;
+      }
+      if (digitalRead(BUT3)==1){
+          button5=!button5;
+          delay(50);
+          if (digitalRead(BUT3)==0){
+              button6=!button6;
+          }
+      }
+      if (button5==true && button6==false){
+          S[p]=3;
+          p=p+1;
+      }
+      if (digitalRead(BUT4)==1){
+          button7=!button7;
+          delay(50);
+          if (digitalRead(BUT4)==0){
+              button8=!button8;
+          }
+      }
+      if (button7==true && button8==false){
+          S[p]=4;
+          p=p+1;
+      }
+    }
+  }
+  if (digitalRead(BUT1)==1){
+    button1=!button1;
+    delay(50);
+    if (digitalRead(BUT1)==0){
+      button2=!button2;
+    }
+  }
+  if (button1==true && button2==false){
+    M[k]=1;
+    k=k+1;
+  }
+  if (digitalRead(BUT2)==1){
+    button3=!button3;
+    delay(50);
+    if (digitalRead(BUT2)==0){
+      button4=!button4;
+    }
+  }
+  if (button3==true && button4==false){
+    M[k]=2;
+    k=k+1;
+  }
+  if (digitalRead(BUT3)==1){
+    button5=!button5;
+    delay(50);
+    if (digitalRead(BUT3)==0){
+      button6=!button6;
+    }
+  }
+  if (button5==true && button6==false){
+    M[k]=3;
+    k=k+1;
+  }
+  if (digitalRead(BUT4)==1){
+    button7=!button7;
+    delay(50);
+    if (digitalRead(BUT4)==0){
+      button8=!button8;
+    }
+  }
+  if (button7==true && button8==false){
+    M[k]=4;
+    k=k+1;
+  }
+  if(k==4){
+    if (M[0]==S[0] && M[1]==S[1] && M[2]==S[2] && M[3]==S[3]){
+      digitalWrite(GREEN, HIGH);
+      delay(1000);
+      digitalWrite(GREEN, LOW);
+      k=0;
+    }
+    else{
+      digitalWrite(RED, HIGH);
+      delay(1000);
+      digitalWrite(RED, LOW);
+      k=0;
+    }
+  }
+}
